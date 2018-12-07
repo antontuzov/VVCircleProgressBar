@@ -1,5 +1,5 @@
 # VVCircleProgressBar
-[![Pod Version](https://img.shields.io/badge/cocoapod-v0.0.4-blue.svg)]
+![Pod Version](https://img.shields.io/badge/cocoapod-v0.0.4-blue.svg)
 [![Swift 4.2](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
 [![Twitter: @vinothvino42](https://img.shields.io/badge/Contact-Twitter-blue.svg?style=flat)](https://twitter.com/vinothvino42)
 
