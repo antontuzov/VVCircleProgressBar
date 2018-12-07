@@ -1,8 +1,9 @@
 # VVCircleProgressBar
-[![Swift 4](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
+[![Pod Version](https://img.shields.io/badge/cocoapod-v0.0.4-blue.svg)]
+[![Swift 4.2](https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat)](https://swift.org)
 [![Twitter: @vinothvino42](https://img.shields.io/badge/Contact-Twitter-blue.svg?style=flat)](https://twitter.com/vinothvino42)
 
-Custom animating circle progress bar.
+A custom pulse animating circle progress bar.
 
 ## Preview
 
@@ -46,10 +47,10 @@ progressBar.font = UIFont(name: "HelveticaNeue-Bold", size: 24)!
 * Progress Bar Color
 
 ```swift
-progressBar.pulsingColor = UIColor.pulsatingFillColor
+progressBar.pulseColor = UIColor.pulseFillColor
 progressBar.progressColor = UIColor.outlineStrokeColor
-progressBar.trackingStrokeColor = UIColor.trackStrokeColor
-progressBar.trackingFillColor = UIColor.backgroundColor
+progressBar.trackStrokeColor = UIColor.trackStrokeColor
+progressBar.trackFillColor = UIColor.backgroundColor
 ```
 
 * Size of Progress Bar
@@ -63,13 +64,13 @@ progressBar.pulseLayerWidth = 1.3
 To start pulse animation
 
 ```swift
-progressBar.startPulsingAnimation()
+progressBar.startPulseAnimation()
 ```
 
 To stop pulse animation
 
 ```swift
-progressBar.stopPulsingAnimation()
+progressBar.stopPulseAnimation()
 ```
 
 ## License

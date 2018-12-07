@@ -21,14 +21,13 @@ class ViewController: UIViewController {
     
     func setupProgressBar() {
         progressBar.center = self.view.center
-        
         progressBar.textColor = UIColor.white
         progressBar.font = UIFont(name: "HelveticaNeue-Bold", size: 24)!
         
-        progressBar.pulsingColor = UIColor.pulsatingFillColor
+        progressBar.pulseColor = UIColor.pulseFillColor
         progressBar.progressColor = UIColor.outlineStrokeColor
-        progressBar.trackingStrokeColor = UIColor.trackStrokeColor
-        progressBar.trackingFillColor = UIColor.backgroundColor
+        progressBar.trackStrokeColor = UIColor.trackStrokeColor
+        progressBar.trackFillColor = UIColor.backgroundColor
 
         progressBar.progressLayerWidth = 20
         progressBar.trackLayerWidth = 20
@@ -42,22 +41,20 @@ class ViewController: UIViewController {
     }
     
     private func setupNotificationsObservers() {
-        NotificationCenter.default.addObserver(self, selector: #selector(handleEnterForeground), name: .UIApplicationWillEnterForeground, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
     }
     
     @objc private func handleEnterForeground() {
-        progressBar.startPulsingAnimation()
+        progressBar.startPulseAnimation()
     }
     
     @IBAction func startBtnPressed(_ sender: Any) {
-        progressBar.startPulsingAnimation()
-        beginDownloadingFile()
+        progressBar.startPulseAnimation()
+        startDownloadingFile()
     }
     
-    private func beginDownloadingFile() {
-        
+    private func startDownloadingFile() {
         progressBar.shapeLayer.strokeEnd = 0
-        
         let configuration = URLSessionConfiguration.default
         let operationQueue = OperationQueue()
         let urlSession = URLSession(configuration: configuration, delegate: self, delegateQueue: operationQueue)
@@ -65,7 +62,6 @@ class ViewController: UIViewController {
         guard let url = URL(string: urlString) else { return }
         let downloadTask = urlSession.downloadTask(with: url)
         downloadTask.resume()
-        
     }
 }
 
@@ -82,5 +78,6 @@ extension ViewController: URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         print("File downloaded")
     }
+    
 }
 

@@ -30,22 +30,22 @@ open class VVCircleProgressBar: UIView {
             progressLabel.textAlignment = textAlignment
         }
     }
-    /// Set pulsing color for the pulsing layer
-    open var pulsingColor: UIColor = UIColor.pulsatingFillColor {
+    /// Set pulse color for the pulse layer
+    open var pulseColor: UIColor = UIColor.pulseFillColor {
         didSet {
-            pulsingLayer.fillColor = pulsingColor.cgColor
+            pulseLayer.fillColor = pulseColor.cgColor
         }
     }
-    /// Set stroke color for the tracking layer
-    open var trackingStrokeColor: UIColor = UIColor.trackStrokeColor {
+    /// Set stroke color for the track layer
+    open var trackStrokeColor: UIColor = UIColor.trackStrokeColor {
         didSet {
-            trackLayer.strokeColor = trackingStrokeColor.cgColor
+            trackLayer.strokeColor = trackStrokeColor.cgColor
         }
     }
-    /// Set fill color for the tracking layer
-    open var trackingFillColor: UIColor = UIColor.backgroundColor {
+    /// Set fill color for the track layer
+    open var trackFillColor: UIColor = UIColor.backgroundColor {
         didSet {
-            trackLayer.fillColor = trackingFillColor.cgColor
+            trackLayer.fillColor = trackFillColor.cgColor
         }
     }
     /// Set the progress color
@@ -70,11 +70,11 @@ open class VVCircleProgressBar: UIView {
     open var pulseLayerWidth: CGFloat = 1.3 {
         didSet {
             animation.toValue = pulseLayerWidth
-            pulsingLayer.add(animation, forKey: "Pulsing")
+            pulseLayer.add(animation, forKey: "pulse")
         }
     }
     
-    public var pulsingLayer: CAShapeLayer!
+    public var pulseLayer: CAShapeLayer!
     public var shapeLayer: CAShapeLayer!
     public var trackLayer: CAShapeLayer!
     public var animation: CABasicAnimation!
@@ -91,13 +91,13 @@ open class VVCircleProgressBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        //MARK: - Pulsing Layer
-        pulsingLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: pulsingColor)
-        self.layer.addSublayer(pulsingLayer)
-        startPulsingAnimation()
+        //MARK: - Pulse Layer
+        pulseLayer = createCircleShapeLayer(strokeColor: .clear, fillColor: pulseColor)
+        self.layer.addSublayer(pulseLayer)
+        startPulseAnimation()
         
         //MARK: - Track Layer
-        trackLayer = createCircleShapeLayer(strokeColor: trackingStrokeColor, fillColor: trackingFillColor)
+        trackLayer = createCircleShapeLayer(strokeColor: trackStrokeColor, fillColor: trackFillColor)
         self.layer.addSublayer(trackLayer)
         
         //MARK: - Shape Layer
@@ -112,21 +112,21 @@ open class VVCircleProgressBar: UIView {
         super.init(coder: aDecoder)
     }
     
-    /// Start the pulsing animation
-    public func startPulsingAnimation() {
+    /// Start the pulse animation
+    public func startPulseAnimation() {
         animation = CABasicAnimation(keyPath: "transform.scale")
         animation.toValue = 1.3
         animation.duration = 0.8
         animation.autoreverses = true
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.repeatCount = Float.infinity
-        pulsingLayer.add(animation, forKey: "Pulsing")
+        pulseLayer.add(animation, forKey: "pulse")
     }
     
-    /// Stop the pulsing animation
-    public func stopPulsingAnimation() {
-        pulsingLayer.lineWidth = 0
-        pulsingLayer.removeAnimation(forKey: "Pulsing")
+    /// Stop the pulse animation
+    public func stopPulseAnimation() {
+        pulseLayer.lineWidth = 0
+        pulseLayer.removeAnimation(forKey: "pulse")
     }
     
     //MARK: - Create Circle Shape Layer
@@ -137,7 +137,7 @@ open class VVCircleProgressBar: UIView {
         layer.strokeColor = strokeColor.cgColor
         layer.lineWidth = 20
         layer.fillColor = fillColor.cgColor
-        layer.lineCap = kCALineCapRound
+        layer.lineCap = CAShapeLayerLineCap.round
         layer.position = self.center
         return layer
     }
@@ -158,7 +158,7 @@ public extension UIColor {
     
     static let backgroundColor = UIColor.rgb(r: 21, g: 22, b: 33)
     static let trackStrokeColor = UIColor.rgb(r: 48, g: 66, b: 151)
-    static let pulsatingFillColor = UIColor.rgb(r: 44, g: 93, b: 160)
+    static let pulseFillColor = UIColor.rgb(r: 44, g: 93, b: 160)
     static let outlineStrokeColor = UIColor.rgb(r: 73, g: 160, b: 223)
     
 }
